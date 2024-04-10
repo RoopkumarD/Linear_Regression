@@ -3,6 +3,10 @@ import pandas as pd
 
 
 def create_linear_model(x: np.ndarray, y: np.ndarray):
+    """
+    USAGE: x and y both are 1d numpy array.
+           Thus, x is single variable.
+    """
     x_mul_y = np.dot(x, y)
     x_sum = np.sum(x)
     y_sum = np.sum(y)
@@ -16,13 +20,13 @@ def create_linear_model(x: np.ndarray, y: np.ndarray):
 
 
 def general_linear_model(x: np.ndarray, y: np.ndarray):
-    # Todo: Fix the description well and also inform about input data format well
-    # also mention how i got to this
     """
-    x is whole data in ax + by + c = z, where (x,y) will be of x
-    x data should be layout in column wise for each x and y
+    USAGE: x should be numpy array with feature being column and
+           each observation being rows.
+           y is target variable which should be of shape (n, 1)
+           where n is number of observations.
 
-    Solving x = A-1b will give us the result
+    How did i get this: Refer README.md for more info
     """
     assert y.shape[1] == 1
 
@@ -33,6 +37,10 @@ def general_linear_model(x: np.ndarray, y: np.ndarray):
     assert np.linalg.det(M) != 0
 
     value = np.dot(np.linalg.inv(M), b)
+
+    # or using pseudo inverse as (A^T.A)^(-1) . A^T is pseudo inverse of A
+    # value = np.dot(np.linalg.pinv(x), y)
+
     return value
 
 
